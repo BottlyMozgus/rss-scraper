@@ -8,7 +8,7 @@ COPY . .
 RUN CGO_ENABLED=0 GOOS=linux go build -trimpath -ldflags="-s -w" -o /out/rss-scraper ./cmd/rss-scraper
 
 # Runtime stage: minimal image
-FROM alpine:3.21
+FROM alpine:3.24
 RUN apk add --no-cache ca-certificates tzdata && adduser -D -u 568 app
 COPY --from=build /out/rss-scraper /usr/local/bin/rss-scraper
 USER app
